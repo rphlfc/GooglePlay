@@ -11,6 +11,8 @@
 		3D441A6D26A1B78600B4255D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D441A6C26A1B78600B4255D /* ContentView.swift */; };
 		3D441A6F26A1B78D00B4255D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D441A6E26A1B78D00B4255D /* Assets.xcassets */; };
 		3D441A7226A1B78D00B4255D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D441A7126A1B78D00B4255D /* Preview Assets.xcassets */; };
+		3DDF9C2526ADB9AD00696BEF /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDF9C2426ADB9AD00696BEF /* TabItem.swift */; };
+		3DDF9C2726AE428300696BEF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3DDF9C2626AE428300696BEF /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		3D441A6E26A1B78D00B4255D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D441A7126A1B78D00B4255D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D441A7326A1B78D00B4255D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DDF9C2426ADB9AD00696BEF /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		3DDF9C2626AE428300696BEF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,7 @@
 		3D441A5E26A1B78600B4255D = {
 			isa = PBXGroup;
 			children = (
+				3DDF9C2626AE428300696BEF /* README.md */,
 				3D441A6926A1B78600B4255D /* GooglePlay */,
 				3D441A6826A1B78600B4255D /* Products */,
 			);
@@ -52,6 +57,7 @@
 		3D441A6926A1B78600B4255D /* GooglePlay */ = {
 			isa = PBXGroup;
 			children = (
+				3DDF9C2326ADB9A000696BEF /* Model */,
 				3D441A6A26A1B78600B4255D /* GooglePlayApp.swift */,
 				3D441A6C26A1B78600B4255D /* ContentView.swift */,
 				3D441A6E26A1B78D00B4255D /* Assets.xcassets */,
@@ -67,6 +73,14 @@
 				3D441A7126A1B78D00B4255D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3DDF9C2326ADB9A000696BEF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3DDF9C2426ADB9AD00696BEF /* TabItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DDF9C2726AE428300696BEF /* README.md in Resources */,
 				3D441A7226A1B78D00B4255D /* Preview Assets.xcassets in Resources */,
 				3D441A6F26A1B78D00B4255D /* Assets.xcassets in Resources */,
 			);
@@ -140,6 +155,7 @@
 			files = (
 				3D441A6D26A1B78600B4255D /* ContentView.swift in Sources */,
 				3D441A6B26A1B78600B4255D /* GooglePlayApp.swift in Sources */,
+				3DDF9C2526ADB9AD00696BEF /* TabItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
