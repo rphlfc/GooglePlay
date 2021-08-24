@@ -4,11 +4,13 @@ Implementação da tela principal do Google Play usando SwiftUI.
 ## Screenshots
 <p align="center">
     <img src="https://user-images.githubusercontent.com/16376748/128952126-6018fb5d-1321-4ac6-b41f-c86c51944c53.png" width="400">
+    <img src="https://user-images.githubusercontent.com/16376748/130534873-70a39e95-b972-4cdc-be48-e92f33913cd2.png" width="400">
 </p>
 
 ## Vídeos
 - [Vídeo no Youtube - Parte 1](https://youtu.be/4U5t-IcXOMA)
 - [Vídeo no Youtube - Parte 2](https://youtu.be/Gl6mBerNCIU)
+- [Vídeo no Youtube - Parte 3](https://youtu.be/jI5fC1WNnkk)
 
 ## Requisitos
 - iOS 14

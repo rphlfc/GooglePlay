@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "HideableTopView",
+        "repositoryURL": "git@github.com:rphlfc/HideableTopView.git",
+        "state": {
+          "branch": "main",
+          "revision": "523f5ab8c7040dd1a98c3c1f671afa1271729641",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

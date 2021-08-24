@@ -16,92 +16,95 @@ struct ContentView: View {
     @State var topViewHeight: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack(spacing: 35) {
-                HStack(spacing: 20) {
-                    Image(systemName: "magnifyingglass")
+        NavigationView {
+            ZStack(alignment: .top) {
+                VStack(spacing: 35) {
+                    HStack(spacing: 20) {
+                        Image(systemName: "magnifyingglass")
+                        
+                        TextField("Pesquisar apps e jogos", text: $search)
+                        
+                        Button(action: {}, label: {
+                            Image(systemName: "mic")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .foregroundColor(.primary)
+                        })
+                        
+                        Button(action: {}, label: {
+                            Image("profile")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                        })
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 8)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
+                    .padding()
                     
-                    TextField("Pesquisar apps e jogos", text: $search)
-                    
-                    Button(action: {}, label: {
-                        Image(systemName: "mic")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 15)
-                            .foregroundColor(.primary)
-                    })
-                    
-                    Button(action: {}, label: {
-                        Image("profile")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
-                    })
+                    CustomTabView(selectedIndex: $selectedIndex)
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 8)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
-                .padding()
+                .offset(y: yOffset > 0 ? yOffset <= 120 ? -yOffset : -120 : 0)
+                .zIndex(1)
+                .padding(.bottom, yOffset > 0 ? yOffset <= 120 ? -yOffset : -120 : 0)
+                .overlay(
+                    GeometryReader { reader -> Color in
+                        let height = reader.frame(in: .global).height
+                        if topViewHeight == 0 {
+                            DispatchQueue.main.async {
+                                topViewHeight = height
+                            }
+                        }
+                        return Color.clear
+                    }
+                    , alignment: .top
+                )
+                .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
+                .background(Color.white)
+                .ignoresSafeArea(.all, edges: .top)
                 
-                CustomTabView(selectedIndex: $selectedIndex)
-            }
-            .offset(y: yOffset > 0 ? yOffset <= 120 ? -yOffset : -120 : 0)
-            .zIndex(1)
-            .padding(.bottom, yOffset > 0 ? yOffset <= 120 ? -yOffset : -120 : 0)
-            .overlay(
-                GeometryReader { reader -> Color in
-                    let height = reader.frame(in: .global).height
-                    if topViewHeight == 0 {
-                        DispatchQueue.main.async {
-                            topViewHeight = height
-                        }
-                    }
-                    return Color.clear
-                }
-                , alignment: .top
-            )
-            .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
-            .background(Color.white)
-            .ignoresSafeArea(.all, edges: .top)
-            
-            GeometryReader { reader in
-                HStack {
-                    // first tab
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        VStack(spacing: 20) {
-                            ForEach(0 ..< 5) { item in
-                                AppsView(title: "Para você")
-                                    .frame(width: screenWidth)
+                GeometryReader { reader in
+                    HStack {
+                        // first tab
+                        ScrollView(.vertical, showsIndicators: false, content: {
+                            VStack(spacing: 20) {
+                                ForEach(0 ..< 5) { item in
+                                    AppsView(title: "Para você")
+                                        .frame(width: screenWidth)
+                                }
                             }
-                        }
-                        .padding(.vertical)
-                        .overlay(
-                            GeometryReader { reader -> Color in
-                                let minY = reader.frame(in: .global).minY
-                                if startingOffset == 0 {
-                                    DispatchQueue.main.async {
-                                        startingOffset = minY
+                            .padding(.vertical)
+                            .overlay(
+                                GeometryReader { reader -> Color in
+                                    let minY = reader.frame(in: .global).minY
+                                    if startingOffset == 0 {
+                                        DispatchQueue.main.async {
+                                            startingOffset = minY
+                                        }
                                     }
+                                    
+                                    DispatchQueue.main.async {
+                                        yOffset = startingOffset + topViewHeight - minY
+                                    }
+                                    
+                                    return Color.clear
                                 }
-                                
-                                DispatchQueue.main.async {
-                                    yOffset = startingOffset + topViewHeight - minY
-                                }
-                                
-                                return Color.clear
-                            }
-                            , alignment: .top
-                        )
-                        .padding(.top, topViewHeight)
-                    })
-                    
-                    ForEach(1 ..< tabItems.count) { i in
-                        Text(tabItems[i].title)
-                            .frame(width: screenWidth)
+                                , alignment: .top
+                            )
+                            .padding(.top, topViewHeight)
+                        })
+                        
+                        ForEach(1 ..< tabItems.count) { i in
+                            Text(tabItems[i].title)
+                                .frame(width: screenWidth)
+                        }
                     }
+                    .offset(x: -CGFloat(selectedIndex) * screenWidth)
                 }
-                .offset(x: -CGFloat(selectedIndex) * screenWidth)
             }
+            .navigationBarHidden(true)
         }
     }
 }
@@ -128,20 +131,25 @@ struct AppsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(apps) { app in
-                        VStack(alignment: .leading) {
-                            Image(app.icon)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .cornerRadius(8)
-                            
-                            Text(app.name)
-                                .font(.title3)
-                                .lineLimit(1)
-                            
-                            Text(app.publisher)
-                                .lineLimit(1)
-                        }
-                        .frame(width: 120)
+                        NavigationLink(
+                            destination: AppDetailsView(app: app),
+                            label: {
+                                VStack(alignment: .leading) {
+                                    Image(app.icon)
+                                        .resizable()
+                                        .frame(width: 120, height: 120)
+                                        .cornerRadius(8)
+                                    
+                                    Text(app.name)
+                                        .font(.title3)
+                                        .lineLimit(1)
+                                    
+                                    Text(app.publisher)
+                                        .lineLimit(1)
+                                }
+                                .foregroundColor(.primary)
+                                .frame(width: 120)
+                            })
                     }
                 }
                 .padding(.horizontal)
